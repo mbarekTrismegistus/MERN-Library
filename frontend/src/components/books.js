@@ -18,9 +18,7 @@ export default function Books() {
 
   return (
     <div>
-        <h1 className='text-5xl my-7 text-white font-extrabold'>
-            Latest Books
-        </h1>
+
         <div className='grid grid-cols-3 justify-center gap-5'>
             
             {books.booksData.map((b) => {

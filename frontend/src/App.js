@@ -1,19 +1,19 @@
 import {NextUIProvider} from "@nextui-org/react";
 import Header from './components/navbar';
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Login from "./components/login";
 import Home from "./components/home";
 import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import { Navigate } from "react-router-dom";
 import Registre from "./components/registre";
 import AddBook from "./components/addBook";
 import Book from "./components/book";
 import { Suspense } from "react";
 import EditBook from "./components/editBook";
 import { useNavigate } from "react-router-dom";
+
 
 function App() {
 

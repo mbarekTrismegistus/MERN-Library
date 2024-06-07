@@ -11,6 +11,7 @@ export default function Registre() {
     const navigate = useNavigate()
     const [mount, setMount] = useState(false)
     const [errMsg, setErrMsg] = useState(false)
+    const [errInfo, setErrInfo] = useState("blah")
 
     useEffect(() => {
         if(sessionStorage.getItem("session")){
@@ -24,24 +25,48 @@ export default function Registre() {
 
     const [username, setUsername] = useState("")
     const [pass, setPass] = useState("")
+    const [image, setImage] = useState("")
+
+    function getBase64(file, onLoadCallback) {
+        return new Promise(function(resolve, reject) {
+            var reader = new FileReader();
+            reader.onload = function() { resolve(reader.result); };
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function handleChange(e){
+        var promise = getBase64(e.target.files[0]);
+        promise.then(function(result) {
+            setImage(result)})
+
+    }
 
     const {mutate: registre, isPending, isError} = useMutation({
         mutationFn: async () => {
             let data = await axios.post("http://localhost:3001/auth/registre", {data: {
-                nom: username,
-                password: pass
+                username: username,
+                password: pass,
+                image: image
             }},{ withCredentials: true })
-            return data.data
+            return data
         },
         onSuccess: async (data) => {
             await axios.post("http://localhost:3001/auth", {data: {
                 username: username,
-                password: pass
+                password: pass,
+                
             }},{ withCredentials: true })
-            sessionStorage.setItem("session", JSON.stringify(data))
+            sessionStorage.setItem("session", JSON.stringify(data.data))
             navigate(0)
         },
-        onError: () => {
+        onError: (data) => {
+            console.log(data.response.status)
+            if(data.response.status == 409){
+
+            }
+            setErrInfo("username already taken")
             setErrMsg(true)
         }
     })
@@ -56,10 +81,11 @@ export default function Registre() {
             Create An Account
         </h1>
         <div>
-            <Input type='text' isInvalid={errMsg} errorMessage={"Invalide Information"} onChange={(e) => setUsername(e.target.value)} label="Username" className='my-5'/>
-            <Input type='text' isInvalid={errMsg} errorMessage={"Invalide Information"} onChange={(e) => setPass(e.target.value)} label="Password" className='my-5'/>
+            <Input type='text' isInvalid={errMsg} errorMessage={errInfo} onChange={(e) => setUsername(e.target.value)} label="Username" className='my-5'/>
+            <Input type='text' isInvalid={errMsg} errorMessage={errInfo} onChange={(e) => setPass(e.target.value)} label="Password" className='my-5'/>
+            <input type='file' onChange={(e) => handleChange(e)}></input>
             <Button color='primary' onClick={registre}>
-                Login
+                Registre
             </Button>
             
         </div>

@@ -16,18 +16,18 @@ export default function Header(){
     return(
         <Navbar>
               <NavbarBrand>
-                <p className="dark:text-white font-bold">Library</p>
+                <Link className="dark:text-white font-bold" to={"/"}>MS Library</Link>
               </NavbarBrand>
               <NavbarContent justify="end">
-                <NavbarItem className="">
+                <NavbarItem>
                   {sessionStorage.getItem("session") ? 
                   <Dropdown className="dark">
                     <DropdownTrigger>
-                      <Avatar color="primary" isBordered/>
+                      <Avatar src={JSON.parse(sessionStorage.getItem("session")).image} color="primary" isBordered/>
                     </DropdownTrigger>
                     <DropdownMenu>
                       <DropdownItem>                 
-                          <p className="dark:text-white">{JSON.parse(sessionStorage.getItem("session")).nom}</p>
+                          <p className="dark:text-white font-bold text-2xl">{JSON.parse(sessionStorage.getItem("session")).username}</p>
                       </DropdownItem>
                       <DropdownItem>
                         <Link to={"/"}>
@@ -35,12 +35,20 @@ export default function Header(){
                         </Link>
                       </DropdownItem>
                       <DropdownItem>
-                          <Button color="danger" onClick={logout} className="dark:text-white">Logout</Button>
+                        <Link to={"/addbook"}>
+                          <p className="dark:text-white">Add a Book</p>
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem color="danger" variant="flat" className="text-danger" onClick={logout} >
+                        Logout
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
                   :
-                  <Button color="primary">Login</Button>
+                  <div>
+                    <Button color="primary" as={Link} className="mx-2" to="/login" radius="full" variant="shadow">Login</Button>
+                    <Button color="primary" as={Link} className="mx-2" to="/registre" radius="full" variant="flat">Registre</Button>
+                  </div>
                   
                   }
                 </NavbarItem>

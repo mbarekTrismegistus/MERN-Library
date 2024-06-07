@@ -5,8 +5,7 @@ const favSchema = new mongoose.Schema({
     book_id: String,
 
 },{
-    collection: "favorites"
-},{ 
+    collection: "favorites",
     timestamps: true 
 })
 
