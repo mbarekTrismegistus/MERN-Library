@@ -7,8 +7,12 @@
 body{
     background-color: black;
     min-height: 100vh;
+    background-image: url("../public/bg.jpg");
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 header{
     min-width: 100%!important;
+    
 }

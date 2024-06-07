@@ -23,9 +23,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
 
+          <Header/>
           <div className="container mx-auto">
             <NextUIProvider className="dark" navigate={navigate}>
-              <Header/>
               <Routes>
                 <Route path="/login" element={<Login/>}>
                 </Route>

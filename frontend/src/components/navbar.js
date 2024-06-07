@@ -14,7 +14,7 @@ export default function Header(){
     }
 
     return(
-        <Navbar>
+        <Navbar className="dark text-white" >
               <NavbarBrand>
                 <Link className="dark:text-white font-bold" to={"/"}>MS Library</Link>
               </NavbarBrand>

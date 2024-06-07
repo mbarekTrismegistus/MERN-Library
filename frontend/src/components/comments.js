@@ -41,7 +41,7 @@ export default function Comments(props) {
           <Textarea label="Comment" isDisabled={props.username ? false : true} placeholder='Add a Comment' onChange={(e) => setContent(e.target.value)} name='content'/>
           <Button color='primary' variant='flat' isDisabled={isPending || props.username ? false : true} onClick={addComment}>Add Comment</Button>
         </div>
-        <div>
+        <div className='backdrop-blur-md'>
             {comments.map((c) => {
                 return(
                     <div className='flex p-5 items-center'>

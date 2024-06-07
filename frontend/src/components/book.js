@@ -104,7 +104,7 @@ export default function Book() {
 
   return (
     <div>
-      <div className='text-white md:flex my-10 container px-5'>
+      <div className='text-white md:flex my-10 container backdrop-blur-md px-5'>
         <Image src={book.bookData.image} className='basis-[50%] max-h-[500px]'/>
         <div className='ms-5 flex basis-[100%]'>
           <div className='flex-1'>
