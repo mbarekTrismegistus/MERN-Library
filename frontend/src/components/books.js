@@ -14,7 +14,7 @@ export default function Books() {
             return data.data
         }
     })
-    const navigate = useNavigate()
+
 
   return (
     <div>

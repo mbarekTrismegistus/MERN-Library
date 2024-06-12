@@ -6,10 +6,15 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors')
 const imgbbUploader = require("imgbb-uploader")
 require('dotenv').config()
+const fs = require('node:fs');
+const bcrypt = require("bcrypt")
 
 
 
 const app = express();
+
+
+
 
 app.listen(3001, () => {
     console.log("auth running")
@@ -34,7 +39,7 @@ app.use(cookieParser());
 async function auth(req,res,next){
     let userData =  await users.findOne({username: req.body.data.username})
     if(userData){
-        if(req.body.data.password === userData.password){
+        if(bcrypt.compareSync(req.body.data.password, userData.password)){
             let token = jwt.sign({userId: userData._id},process.env.AUTH_SECRET)
             res.cookie(userData._id, token, {httpOnly: true})
             res.status(200).json(userData)
@@ -52,6 +57,7 @@ async function registre(req,res,next){
     let userData = req.body.data
     let base64img
     let imgdata
+    let hashpass = bcrypt.hashSync(userData.password, 10)
 
     if(req.body.data.image){
         base64img = req.body.data.image.substr(req.body.data.image.indexOf(',') + 1);
@@ -71,6 +77,7 @@ async function registre(req,res,next){
     let newUser = new users({
         ...userData,
         image: imgdata?.url || "",
+        password: hashpass
     })
     try {
         user = await newUser.save()
@@ -99,6 +106,7 @@ async function registre(req,res,next){
 
 app.post("/auth", auth)
 app.post("/auth/registre", registre)
+
 
 
 

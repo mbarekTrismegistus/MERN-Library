@@ -6,7 +6,6 @@ const imgbbUploader = require("imgbb-uploader")
 require('dotenv').config() 
 
 
-
 const app = express();
 
 app.listen(3002, () => {
@@ -25,6 +24,7 @@ const corsOptions ={
 }
 
 app.use(cors(corsOptions))
+
 
 
 async function getBooks(req, res, next){
@@ -46,12 +46,12 @@ async function deleteBook(req, res, next){
 }
 
 async function addBook(req,res, next){
-    let bookData = req.body.data;
+    let bookData = req.body;
     
     let base64img
     let imgdata
 
-    if(req.body.data.image){
+    if(req.body.data?.image){
         base64img = req.body.data.image.substr(req.body.data.image.indexOf(',') + 1);
 
         const options = {
@@ -78,9 +78,9 @@ async function addBook(req,res, next){
 async function updateBook(req, res, next){
     let base64img
     let imgdata
-    let data = req.body.data
+    let data = req.body
 
-    if(req.body.data.image){
+    if(req.body.data?.image){
         base64img = req.body.data.image.substr(req.body.data.image.indexOf(',') + 1);
 
         const options = {

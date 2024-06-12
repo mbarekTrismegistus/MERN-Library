@@ -53,20 +53,21 @@ export default function Registre() {
             return data
         },
         onSuccess: async (data) => {
+            
             await axios.post("http://localhost:3001/auth", {data: {
                 username: username,
                 password: pass,
                 
             }},{ withCredentials: true })
+            console.log("nigga")
             sessionStorage.setItem("session", JSON.stringify(data.data))
-            navigate(0)
+            navigate("/")
         },
         onError: (data) => {
             console.log(data.response.status)
             if(data.response.status == 409){
-
+                setErrInfo("username already taken")
             }
-            setErrInfo("username already taken")
             setErrMsg(true)
         }
     })
