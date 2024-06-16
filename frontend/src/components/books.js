@@ -3,6 +3,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import {Card, CardHeader, CardBody, Image, Button, CardFooter, Link} from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
+import { HeartIcon } from './icons/heart';
 
 
 export default function Books() {
@@ -14,6 +15,8 @@ export default function Books() {
             return data.data
         }
     })
+
+
 
 
   return (
@@ -38,11 +41,9 @@ export default function Books() {
                                 width={270}
                             />
                         </CardBody>
-                        <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-                            <p className="text-tiny text-white/80">Available soon.</p>
-                            <Button className="text-tiny text-white" color="primary" radius="full" size="sm">
-                                Notify me
-                            </Button>
+                        <CardFooter className="justify-start before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+                            <HeartIcon filled={true} fill='red'/>
+                            <p className='ms-2'>{b.likes}</p>
                         </CardFooter>
                     </Card>
                 )

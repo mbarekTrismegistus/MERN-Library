@@ -45,6 +45,10 @@ async function auth(req,res,next){
             res.status(200).json(userData)
             next()
         }
+        else{
+            res.status(500).json("false info")
+            next()
+        }
     }
     else{
         res.status(500).json("user not found")

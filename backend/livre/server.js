@@ -46,7 +46,7 @@ async function deleteBook(req, res, next){
 }
 
 async function addBook(req,res, next){
-    let bookData = req.body;
+    let bookData = req.body.data;
     
     let base64img
     let imgdata
@@ -99,8 +99,22 @@ async function updateBook(req, res, next){
     next()
 }
 
+async function incFav(req, res, next){
+    let data = await books.findOneAndUpdate({_id: req.params.id}, {$inc : {'likes' : 1}})
+    res.status(200).json(data)
+    next()
+}
+
+async function decrFav(req, res, next){
+    let data = await books.findOneAndUpdate({_id: req.params.id}, {$inc : {'likes' : -1}})
+    res.status(200).json(data)
+    next()
+}
+
 app.get("/books", getBooks)
 app.get("/books/:id", getBook)
 app.post("/books/edit/:id", updateBook)
 app.delete("/books/:id", deleteBook)
 app.post("/books", addBook)
+app.post("/books/inc/:id", incFav)
+app.post("/books/decr/:id", decrFav)

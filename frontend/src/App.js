@@ -13,6 +13,8 @@ import Book from "./components/book";
 import { Suspense } from "react";
 import EditBook from "./components/editBook";
 import { useNavigate } from "react-router-dom";
+import AddDemande from "./components/addDemande";
+import Dashboard from "./components/dashboard";
 
 
 function App() {
@@ -38,6 +40,10 @@ function App() {
                 <Route path="/books/:id" element={<Suspense fallback={"Loading..."}><Book/></Suspense>}>
                 </Route>
                 <Route path="/books/edit/:id" element={<Suspense fallback={"Loading ..."}><EditBook/></Suspense>}>
+                </Route>
+                <Route path="/addDemande" element={<AddDemande/>}>
+                </Route>
+                <Route path="/dashboard" element={<Dashboard/>}>
                 </Route>
               </Routes>
             </NextUIProvider>

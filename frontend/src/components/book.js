@@ -65,11 +65,12 @@ export default function Book() {
             book_id: book.bookData._id
           }
         })
-       
+        
         return res
       }
     },
-    onSuccess: (res) => {
+    onSuccess: async (res) => {
+      await axios.post(`http://localhost:3002/books/inc/${book.bookData._id}`)
       queryClient.invalidateQueries("favorite")
       setIsFav(true)
     }
@@ -82,7 +83,8 @@ export default function Book() {
         return res
       }
     },
-    onSuccess: (res) => {
+    onSuccess: async (res) => {
+      await axios.post(`http://localhost:3002/books/decr/${book.bookData._id}`)
       queryClient.invalidateQueries("favorite")
       setIsFav(false)
     }

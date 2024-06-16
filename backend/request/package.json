@@ -1,0 +1,16 @@
+{
+  "name": "demande",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon run server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "imgbb-uploader": "^1.5.1",
+    "mongoose": "^8.4.1",
+    "nodemon": "^3.1.3"
+  }
+}

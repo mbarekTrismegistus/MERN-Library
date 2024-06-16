@@ -39,6 +39,11 @@ export default function Header(){
                           <p className="dark:text-white">Add a Book</p>
                         </Link>
                       </DropdownItem>
+                      <DropdownItem>
+                        <Link to={"/addDemande"}>
+                          <p className="dark:text-white">Request a Book</p>
+                        </Link>
+                      </DropdownItem>
                       <DropdownItem color="danger" variant="flat" className="text-danger" onClick={logout} >
                         Logout
                       </DropdownItem>
