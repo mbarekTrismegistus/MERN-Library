@@ -1,0 +1,16 @@
+services:
+        auth:
+            container_name: auth
+            build: 
+                  context: .
+                  dockerfile: ./backend/auth/Dockerfile
+            ports:
+              - 8000:8000
+
+        comment: 
+            container_name: comment
+            build: 
+                  context: .
+                  dockerfile: ./backend/comment/Dockerfile
+            ports:
+              - 8001:8001

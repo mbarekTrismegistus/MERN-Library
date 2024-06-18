@@ -6,6 +6,8 @@ export default function Dashboard() {
     const navigate = useNavigate();
 
     const [mount, setMount] = useState(false)
+
+
     
     useEffect(() => {
         if(sessionStorage.getItem("session")){
@@ -26,7 +28,11 @@ export default function Dashboard() {
 
   return (
     mount ?
-    <div>dashboard</div>
+    <div>
+        <p className='text-6xl font-extrabold text-white'>
+            Dashboard
+        </p>
+    </div>
     :
     <div>Loading ...</div>
   )
